@@ -1,0 +1,31 @@
+#1 Generadores vs. Estructuras de Datos
+
+La principal diferencia entre un generador y una estructura de datos como listas o tuplas radica en su manejo de la información. Mientras que las listas y tuplas almacenan todos los elementos en memoria y permiten acceso inmediato a cualquier dato, los generadores producen elementos uno por uno bajo demanda, mediante un proceso secuencial.
+Un ejemplo de la vida real puede ser :
+Imagina que tenemos una serie con varios episodios. Si usamos una lista, tendríamos todos los episodios en memoria, lo que podría ser pesado si la serie es muy larga. En cambio, con un generador, solo cargamos un episodio a la vez, lo que es más eficiente , ya que solo consumiriamos ese episodio, no veremos todos los capitulos a la vez, que ayudaría también en gran forma a la memoria.
+
+#2. Decoradores y su Ámbito (Scope)
+
+A.Explica en una frase qué problema principal resuelve un decorador.
+-Un decorador permite modificar o ampliar el comportamiento de una función sin alterar su código fuente original, de forma flexible.
+
+B.Describe cómo se relaciona el concepto de cierre (closure) con el funcionamiento interno de un decorador.
+-Los decoradores dependen completamente de los closures para funcionar. El closure es lo que permite que la función wrapper interna "recuerde" y acceda a la función original y a cualquier variable del decorador, incluso después de que el decorador haya terminado de ejecutarse. Sin closures, el wrapper no tendría acceso a la función que debe decorar y los decoradores simplemente no funcionarían.
+
+C.Context Managers y la Declaración with
+
+1. La declaración with se utiliza para garantizar el correcto uso de recursos como archivos, conexiones de red o bases de datos. Ayuda a prevenir la fuga de recursos asegurando que se liberen adecuadamente, incluso si ocurren excepciones, evitando así problemas como archivos abiertos indefinidamente o conexiones no cerradas.
+
+2. Para ser un Context Manager, una clase debe implementar __enter__ y __exit__. El método __enter__ inicializa y retorna el recurso a gestionar, mientras que __exit__ se ejecuta automáticamente al salir del bloque with y se encarga de la liberación del recurso y el manejo de excepciones.
+
+D. Concurrencia y Paralelismo
+
+Multithreading utiliza hilos del sistema operativo para ejecutar múltitas tareas concurrentemente, pero en Python el GIL (Global Interpreter Lock) impide que los hilos ejecuten código Python en paralelo, limitándolo a concurrencia de E/S pero no a paralelismo real para tareas CPU-intensivas.
+Asyncio utiliza un solo hilo con tareas cooperativas (async/await) donde las tareas ceden el control voluntariamente durante operaciones de E/S, permitiendo alta concurrencia para operaciones con mucho E/S.
+Escenarios preferibles:
+Multithreading: Para operaciones de Entrada/Salida bloqueante donde no puedes modificar el código
+Asyncio: Para aplicaciones con mucho Entrada/Salida donde puedes usar código asíncrono (servidores web, APIs, scraping)
+*El GIL es la restricción que hace que solo un hilo pueda ejecutar código Python a la vez, anulando las ventajas del multithreading para tareas que requieren CPU.
+
+E. El Operador super()
+El MRO es el orden que Python sigue para buscar métodos en clases con herencia múltiple. El super() utiliza este orden para determinar cuál es la siguiente clase en la jerarquía a la que debe llamar.
